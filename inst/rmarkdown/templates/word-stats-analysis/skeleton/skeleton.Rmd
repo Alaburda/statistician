@@ -1,0 +1,85 @@
+---
+title: "Statistinė analizė"
+author: "Paulius Alaburda"
+date: "`r Sys.Date()`"
+output: 
+  word_document:
+    reference_docx: "word_stats_analysis_template.docx"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      warning = FALSE, 
+                      message = FALSE, 
+                      fig.width = 5.8, 
+                      fig.height = 4.8, 
+                      dpi = 300,
+                      results = 'asis')
+
+options(scipen=999, digits = 3)
+
+library(tidyverse)
+library(readxl)
+library(knitr)
+library(janitor)
+library(gtable)
+library(statistician)
+
+default_plot_hook <- knitr::knit_hooks$get('plot')
+
+knitr::knit_hooks$set(plot = function(x, options) {
+  default_md <- default_plot_hook(x, options)
+  link_attr <- sprintf("{width=%sin height=%sin}", options$fig.width, options$fig.height)
+  sub("(!\\[.*]\\(.*\\))", paste0("\\1", link_attr), default_md)
+})
+
+
+```
+
+## Statistinės analizės metodai
+
+
+Statistinė analizė buvo atlikta su R v3.6.2. Anketų atsakymų kokybiniai duomenys yra pateikti kaip dažniai ir procentai. 
+
+* Kokybiniai duomenys yra pateikti kaip ...
+* Kiekybiniai duomenys yra pateikti kaip ...
+* Dviejų kokybinių kintamųjų priklausomybė buvo vertinta Pirsono Chi-kvadrato testu.
+* Kai vienas iš tikėtinų dažnių buvo mažesnis negu 5, buvo taikytas Fisher tikslus testas.
+
+
+
+Respondentų atsakymų pasiskirstymas buvo palygintas Chi-kvadrato testu lyginant rezultatus pagal vieną kokybinį kintamąjį ir Cochran–Mantel–Haenszel testas lyginant rezultatus pagal 2 arba daugiau kokybinius kintamuosius. Statistiškai reikšmingi rezultatai laikyti, kai p < 0,05.
+
+### Aprašomoji statistika
+
+```{r, eval = FALSE}
+
+print_one_way()
+print_two_way()
+
+```
+
+
+### Statistiniai testai
+
+Chi-kvadrato testui:
+
+```{r, eval = FALSE}
+
+print_chisq_table(data = mtcars, x = "cyl", y = "gear")
+print_chisq_test(data = mtcars, x = "cyl", y = "gear")
+print_chisq_plot(data = mtcars, x = "cyl", y = "gear")
+
+```
+
+Stjudento t-testas:
+
+```{r, eval = FALSE}
+
+print_student_table(data = mtcars, x = "cyl", y = "gear")
+print_student_test(data = mtcars, x = "cyl", y = "gear")
+print_student_plot(data = mtcars, x = "cyl", y = "gear")
+
+```
+
+

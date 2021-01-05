@@ -1,13 +1,13 @@
 Package: statistician
-Title: What the Package Does (One Line, Title Case)
+Title: Making Easy Statistical Reports
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Paulius",
+           family = "Alaburda",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
+           email = "paulius.alaburda@egmail.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Description: Provides functions and helpers to make statistical reports quickly.
 License: MIT + file LICENSE
 Suggests: 
     testthat
